@@ -294,6 +294,20 @@ func TestQueriesAgainstOldEngine(t *testing.T) {
 			query: "timestamp(http_requests_total)",
 		},
 		{
+			name: "sort",
+			load: `load 30s
+					http_requests_total{pod="nginx-1"} 0
+					http_requests_total{pod="nginx-2"} 1`,
+			query: "sort(http_requests_total)",
+		},
+		{
+			name: "sort_desc",
+			load: `load 30s
+					http_requests_total{pod="nginx-1"} 0
+					http_requests_total{pod="nginx-2"} 1`,
+			query: "sort_desc(http_requests_total)",
+		},
+		{
 			name: "rad",
 			load: `load 30s
 					http_requests_total{pod="nginx-1"} 5.5+1x15
