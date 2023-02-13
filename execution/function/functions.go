@@ -215,6 +215,16 @@ var Funcs = map[string]FunctionCall{
 			},
 		}
 	},
+	"sort": func(f FunctionArgs) promql.Sample {
+		return promql.Sample{
+			Point: promql.Point{
+				T: f.StepTime,
+				Metric: promql.Metric{},
+				Point:  promql.Point{V: float64(f.Points)},
+				V:  float64(f.Points),
+			},
+		}
+	},
 	"changes": func(f FunctionArgs) promql.Sample {
 		if len(f.Points) == 0 {
 			return InvalidSample
